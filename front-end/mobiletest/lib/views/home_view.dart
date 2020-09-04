@@ -12,21 +12,23 @@ class HomeView extends StatelessWidget {
               appBar: AppBar(
                 title: Text("Mobile Test MKM"),
               ),
-              body: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text("Time"),
-                      SizedBox(height: 10.0),
-                      RaisedButton(
-                        onPressed: () {},
-                        //Sudah login tampil Halo username, waktu login anda time
-                        child: Text("Hello"),
-                      )
-                    ],
-                  )),
+              body: Center(
+                child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(model.timeString),
+                        SizedBox(height: 10.0),
+                        RaisedButton(
+                          onPressed: () {},
+                          //Sudah login tampil Halo username, waktu login anda time
+                          child: Text("Hello"),
+                        )
+                      ],
+                    )),
+              ),
             ));
   }
 }
