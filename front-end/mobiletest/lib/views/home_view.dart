@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobiletest/configs/shared_preference.dart';
 import 'package:mobiletest/viewmodels/home_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
@@ -21,12 +22,21 @@ class HomeView extends StatelessWidget {
                       children: [
                         Text(model.timeString),
                         SizedBox(height: 10.0),
-                        RaisedButton(
-                          onPressed: () {},
-                          //Sudah login tampil Halo username, waktu login anda time
-                          child: Text("Hello"),
-                        )
-                      ],  
+                        model.isBusy
+                            ? CircularProgressIndicator()
+                            : RaisedButton(
+                                onPressed: () {
+                                  model.isUserLogin == null
+                                      ? Navigator.pushReplacementNamed(
+                                          context, '/login')
+                                      : print("Sudah login");
+                                },
+                                //Sudah login tampil Halo username, waktu login anda time
+                                child: Text(model.isUserLogin == null
+                                    ? "Hello Belum Login"
+                                    : "Hello" + UserSharedPreference.getUser().toString()),
+                              )
+                      ],
                     )),
               ),
             ));

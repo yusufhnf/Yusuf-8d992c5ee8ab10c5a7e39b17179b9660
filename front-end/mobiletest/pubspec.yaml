@@ -33,6 +33,7 @@ dependencies:
   intl: ^0.16.1
   imei_plugin: ^1.2.0
   shared_preferences: ^0.5.10
+  fluttertoast: ^7.0.4
 
 dev_dependencies:
   flutter_test:

@@ -27,9 +27,10 @@ exports.createUser = function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var timestamp = req.body.timestamp;
+    var loginstate = req.body.loginstate
 
     connection.query('INSERT INTO users (username, password, login_time, login_state) VALUES (?,?,?,?)',
-        [username, password, timestamp, "false"],
+        [username, password, timestamp, loginstate],
         function (error, result) {
             if (error) throw error;
             response.ok("Berhasil Tambah Data", res);

@@ -1,20 +1,25 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as client;
 import 'package:mobiletest/models/user_model.dart';
 class APIProvider {
   String _url = 'http://192.168.100.249:3000';
+  String failed = 'Gagal';
 
-  Future<List<User>> getUserDetail(String id) async {
-    final response = await client.put('$_url/todolist/users/' + id);
+  Future getUserDetail(String username, String password) async {
+    final response = await client.put('$_url/todolist/users/' + username);
     if(response.statusCode == 200) {
-      var res = userFromJson(response.body);
+      var res = User.fromJson(json.decode(response.body));
       print(res);
       return res;
+    } else {
+      throw Exception('Failed Login');
     }
   }
 
   Future createUser(username, pass, timestamp) async {
     final response = await client.post("$_url/users/create",
-    body: {'username': username,'password': pass,'timestamp': timestamp});
+    body: {'username': username,'password': pass,'timestamp': timestamp, 'login_state': 'false'});
     if (response.statusCode == 200) {
       return response;
     } else {
