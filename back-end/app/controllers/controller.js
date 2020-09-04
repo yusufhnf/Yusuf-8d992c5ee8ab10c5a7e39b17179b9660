@@ -5,6 +5,13 @@ exports.index = function (req, res) {
     response.ok("Successful REST API Connect", res);
 }
 
+exports.showAllUsers = function (req, res) {
+    connection.query('SELECT * FROM user', function (error, result) {
+        if (error) throw error;
+        response.ok(result, res);
+    });
+};
+
 exports.loginUser = function (req, res) {
     let username = req.params.username;
     let password = req.params.password;

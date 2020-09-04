@@ -26,7 +26,7 @@ class HomeView extends StatelessWidget {
                           //Sudah login tampil Halo username, waktu login anda time
                           child: Text("Hello"),
                         )
-                      ],
+                      ],  
                     )),
               ),
             ));
