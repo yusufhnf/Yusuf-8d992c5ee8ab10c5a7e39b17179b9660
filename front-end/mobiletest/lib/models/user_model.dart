@@ -18,7 +18,7 @@ class User {
 
     String username;
     String password;
-    int loginTime;
+    String loginTime;
     String loginState;
 
     factory User.fromJson(Map<String, dynamic> json) => User(

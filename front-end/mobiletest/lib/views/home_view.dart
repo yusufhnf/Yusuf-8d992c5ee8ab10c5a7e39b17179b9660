@@ -27,14 +27,14 @@ class HomeView extends StatelessWidget {
                             : RaisedButton(
                                 onPressed: () {
                                   model.isUserLogin == null
-                                      ? Navigator.pushReplacementNamed(
+                                      ? Navigator.pushNamed(
                                           context, '/login')
                                       : print("Sudah login");
                                 },
                                 //Sudah login tampil Halo username, waktu login anda time
                                 child: Text(model.isUserLogin == null
-                                    ? "Hello Belum Login"
-                                    : "Hello" + UserSharedPreference.getUser().toString()),
+                                    ? "Hello, Silakan Login"
+                                    : "Hello" + model.isUserLogin),
                               )
                       ],
                     )),

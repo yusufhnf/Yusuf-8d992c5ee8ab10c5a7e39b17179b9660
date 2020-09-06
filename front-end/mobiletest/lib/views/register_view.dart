@@ -3,7 +3,6 @@ import 'package:mobiletest/viewmodels/register_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 
 class RegisterView extends StatelessWidget {
-  
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegisterViewModel>.reactive(
@@ -40,15 +39,17 @@ class RegisterView extends StatelessWidget {
                             InputDecoration(hintText: "Ulangi Password"),
                       ),
                       SizedBox(height: 30.0),
-                      RaisedButton(
-                        color: Colors.redAccent,
-                        onPressed: () {
-                          model.createUser();
-                        },
-                        //Sudah login tampil Halo username, waktu login anda time
-                        child: model.isBusy ? CircularProgressIndicator() : Text("Register",
-                            style: TextStyle(color: Colors.white)),
-                      ),
+                      model.isBusy
+                          ? CircularProgressIndicator()
+                          : RaisedButton(
+                              color: Colors.redAccent,
+                              onPressed: () {
+                                model.createUser(context);
+                              },
+                              //Sudah login tampil Halo username, waktu login anda time
+                              child: Text("Register",
+                                  style: TextStyle(color: Colors.white)),
+                            ),
                     ],
                   ),
                 ),

@@ -25,34 +25,35 @@ class LoginView extends StatelessWidget {
                     ),
                     SizedBox(height: 10.0),
                     TextFormField(
+                      obscureText: true,
                       controller: model.etPassword,
                       decoration:
                           InputDecoration(hintText: "Masukkan Password"),
                     ),
                     SizedBox(height: 30.0),
-                    RaisedButton(
-                      color: Colors.green,
-                      onPressed: () {
-                        model.loginGo().whenComplete(() =>
-                            Navigator.pushReplacementNamed(context, '/home'));
-                      },
-                      //Sudah login tampil Halo username, waktu login anda time
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
+                    model.isBusy
+                        ? CircularProgressIndicator()
+                        : RaisedButton(
+                            color: Colors.green,
+                            onPressed: () {
+                              model.loginGo(context);
+                            },
+                            //Sudah login tampil Halo username, waktu login anda time
+                            child: Text(
+                              "Login",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                     SizedBox(height: 10.0),
                     RaisedButton(
                       color: Colors.redAccent,
                       onPressed: () {
-                        Navigator.pushNamed(context, '/register');
+                        model.navigateRegister(context);
                       },
                       //Sudah login tampil Halo username, waktu login anda time
                       child: Text("Register",
                           style: TextStyle(color: Colors.white)),
                     ),
-                    model.isBusy ? CircularProgressIndicator() : Text("Mobile Test"),
                   ],
                 ),
               ),

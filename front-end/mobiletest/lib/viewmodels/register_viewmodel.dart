@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobiletest/services/api_provider.dart';
 import 'package:stacked/stacked.dart';
+import 'package:toast/toast.dart';
 
 class RegisterViewModel extends BaseViewModel {
   APIProvider api = APIProvider();
@@ -13,22 +14,19 @@ class RegisterViewModel extends BaseViewModel {
 
   get timeString => _timeString;
 
-  Future createUser() async {
+  Future createUser(BuildContext context) async {
     setBusy(true);
-    await api.createUser(etUsername.text, etPassword.text, timeString);
+    if (etPassword.text == etRepeatPassword.text) {
+      api = await api.createUser(etUsername.text, etPassword.text);
+      api != null ? navigateLogin(context) : Toast.show("Login tidak Berhasil", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    } else {
+      Toast.show("Password tidak sama", context, duration: Toast.LENGTH_SHORT, gravity:  Toast.BOTTOM);
+    }
     setBusy(false);
     notifyListeners();
   }
 
-  void _getTime() {
-    final DateTime now = DateTime.now();
-    final String formattedDateTime = _formatDateTime(now);
-    _timeString = formattedDateTime;
-    notifyListeners();
-  }
-
-  // HH:mm:ss
-  String _formatDateTime(DateTime dateTime) {
-    return DateFormat('HH:mm:ss').format(dateTime);
+  void navigateLogin(BuildContext context) {
+    Navigator.pushReplacementNamed(context, '/login');
   }
 }
